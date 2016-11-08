@@ -1,0 +1,20 @@
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\bin\Debug\FSchatFront.exe.config
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\bin\Debug\FSchatFront.exe
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\bin\Debug\FSchatFront.pdb
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\obj\Debug\FSchatFront.Form1.resources
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\obj\Debug\FSchatFront.Properties.Resources.resources
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\obj\Debug\FSchatFront.csproj.GenerateResource.Cache
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\obj\Debug\FSchatFront.exe
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\obj\Debug\FSchatFront.pdb
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\obj\Debug\FSchatFront.Register.resources
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\bin\Debug\Flurl.dll
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\bin\Debug\Flurl.Http.dll
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\bin\Debug\Newtonsoft.Json.dll
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\bin\Debug\Flurl.pdb
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\bin\Debug\Flurl.xml
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\bin\Debug\Flurl.Http.pdb
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\bin\Debug\Flurl.Http.xml
+c:\users\rone\documents\visual studio 2015\Projects\FSchatFront\FSchatFront\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Rone\Source\Repos\CECS478FSClient\FSchatFront\bin\Debug\FSchatFront.exe.config
+C:\Users\Rone\Source\Repos\CECS478FSClient\FSchatFront\obj\Debug\FSchatFront.exe
+C:\Users\Rone\Source\Repos\CECS478FSClient\FSchatFront\obj\Debug\FSchatFront.pdb
