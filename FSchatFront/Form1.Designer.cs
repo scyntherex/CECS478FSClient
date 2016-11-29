@@ -82,6 +82,7 @@
             this.email.Name = "email";
             this.email.Size = new System.Drawing.Size(242, 20);
             this.email.TabIndex = 4;
+            this.email.Text = "a@a.com";
             // 
             // password
             // 
@@ -89,6 +90,7 @@
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(242, 20);
             this.password.TabIndex = 5;
+            this.password.Text = "changeme";
             // 
             // textBox1
             // 

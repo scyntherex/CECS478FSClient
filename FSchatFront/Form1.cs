@@ -13,6 +13,18 @@ using System.Net.Http;
 
 namespace FSchatFront
 {
+    public class User
+    {
+        public int id { get; set; }
+        public string email { get; set; }
+    }
+
+    public class RootObject
+    {
+        public string auth_token { get; set; }
+        public User user { get; set; }
+    }
+
     public partial class Form1 : Form
     {
         public Form1()
@@ -32,7 +44,7 @@ namespace FSchatFront
             String em = email.Text;
             String pw = password.Text;
             loginUser();
-            autheticateUser("https://thefsocietychat.herokuapp.com/home");
+            //autheticateUser("https://thefsocietychat.herokuapp.com/home");
         }
 
         async void loginUser()
@@ -45,9 +57,9 @@ namespace FSchatFront
                     password = password.Text.ToString(),
                 });
                 string responseJson = await responseMessage.Content.ReadAsStringAsync();
-                //textBox1.Text = responseJson;
-              
-
+                RootObject user = JsonConvert.DeserializeObject<RootObject>(responseJson);
+                textBox1.Text = user.auth_token;
+       
                 if (responseMessage.IsSuccessStatusCode)
                 {
                     linkLabel1.Visible = true;
@@ -68,7 +80,7 @@ namespace FSchatFront
             }
         }
 
-        async void autheticateUser(string url)
+       async void autheticateUser(string url)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -76,9 +88,11 @@ namespace FSchatFront
                 {
                     using (HttpContent content = response.Content)
                     {
+                        
                         string response2 = await content.ReadAsStringAsync();
                         string output = response2.ToString();
-                        textBox1.Text = output;
+                        //textBox1.Text = output;
+
                     }
                 }
             }
