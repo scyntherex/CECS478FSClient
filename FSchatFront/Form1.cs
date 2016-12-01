@@ -196,7 +196,8 @@ namespace FSchatFront
             ;
 
             string result = response.ToString();
-            MessageBox.Show(result);
+            //MessageBox.Show(result);
+            get_mess();
         }
 
 
@@ -205,6 +206,42 @@ namespace FSchatFront
             
         }
 
+        async void get_mess()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    string accesstoken = user.auth_token;
+                    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accesstoken);
+
+                    using (HttpResponseMessage response = await client.GetAsync("https://thefsocietychat.herokuapp.com/messages/index?conversation_id=" 
+                        + ConversationID))
+                    {
+                        string responseJson = await response.Content.ReadAsStringAsync();
+                        System.Data.DataSet dataSet = JsonConvert.DeserializeObject<System.Data.DataSet>(responseJson);
+                        System.Data.DataTable dataTable = dataSet.Tables[""];
+
+                        foreach (System.Data.DataRow row in dataTable.Rows)
+                        {
+                            users_list.Items.Add(row[""]);
+                        }
+                    }
+                }
+
+            }
+            catch (FlurlHttpTimeoutException)
+            {
+                MessageBox.Show("Timed out!");
+            }
+            catch (FlurlHttpException ex)
+            {
+                if (ex.Call.Response != null)
+                    MessageBox.Show("Failed with response code " + ex.Call.Response.StatusCode);
+                else
+                    MessageBox.Show("Totally failed before getting a response! " + ex.Message);
+            }
+        }
         
     }
 
