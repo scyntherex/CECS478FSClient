@@ -37,6 +37,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.users_list = new System.Windows.Forms.ComboBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -98,7 +101,7 @@
             this.textBox1.Location = new System.Drawing.Point(15, 216);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(119, 24);
+            this.textBox1.Size = new System.Drawing.Size(831, 24);
             this.textBox1.TabIndex = 6;
             // 
             // linkLabel1
@@ -122,11 +125,43 @@
             this.users_list.TabIndex = 8;
             this.users_list.SelectedIndexChanged += new System.EventHandler(this.users_list_SelectedIndexChanged);
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(432, 160);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(347, 20);
+            this.textBox2.TabIndex = 9;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.textBox3.Location = new System.Drawing.Point(432, 33);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.ReadOnly = true;
+            this.textBox3.Size = new System.Drawing.Size(411, 98);
+            this.textBox3.TabIndex = 10;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(785, 157);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(58, 23);
+            this.button3.TabIndex = 11;
+            this.button3.Text = "send";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(883, 255);
+            this.ClientSize = new System.Drawing.Size(858, 250);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.users_list);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.textBox1);
@@ -154,6 +189,9 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.ComboBox users_list;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Button button3;
     }
 }
 

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Flurl.Http;
 using Newtonsoft.Json;
 using System.Net.Http;
+using Flurl;
 
 namespace FSchatFront
 {
@@ -19,6 +20,9 @@ namespace FSchatFront
     {
 
         private RootObject user;
+        // private ConvoUnique cid;
+        //private string recipient_email;
+        public string ConversationID;
         public Form1()
         {
             InitializeComponent();
@@ -95,6 +99,33 @@ namespace FSchatFront
 
         private void users_list_SelectedIndexChanged(object sender, EventArgs e)
         {
+            createConveration(users_list.SelectedItem.ToString());
+        }
+        
+        public string conversation_id { get; set; }
+        
+        async void createConveration(string email)
+        {
+            var url = new Url("https://thefsocietychat.herokuapp.com/conversations/create");
+            var theclient = url.WithOAuthBearerToken(user.auth_token);
+            var response = await theclient
+                .WithHeader("Accept", "application/json")
+                .PostUrlEncodedAsync(new
+                {
+                    recipient_email = email
+                })
+                .ReceiveString()
+            ;
+            // string cid = JsonConvert.DeserializeObject<ConvoUnique>(response);
+            string createConversatioResponse = response.ToString();
+            Form1 convoID = JsonConvert.DeserializeObject<Form1>(createConversatioResponse);
+            string otherOutput = convoID.ToString();
+            ConversationID = convoID.conversation_id.ToString();
+            MessageBox.Show(ConversationID);
+            // textBox3.Text = cid.ToString();
+
+
+
 
         }
 
@@ -139,6 +170,42 @@ namespace FSchatFront
         {
 
         }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            mess_send();
+        }
+
+        async void mess_send()
+        {
+            var url = new Url("https://thefsocietychat.herokuapp.com/messages/create");
+            var theclient = url.WithOAuthBearerToken(user.auth_token);
+            var response = await theclient
+                .WithHeader("Accept", "application/json")
+                .PostUrlEncodedAsync(new
+                {
+                    conversation_id = ConversationID,
+                    body = textBox2.Text
+                })
+                .ReceiveString()
+            ;
+
+            string result = response.ToString();
+            MessageBox.Show(result);
+        }
+
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        
     }
 
     public class User
@@ -160,4 +227,13 @@ namespace FSchatFront
         public string created_at { get; set; }
         public string updated_at { get; set; }
     }
+
+    //public class ConvoUnique
+    //{
+    //    public string conversation_id { get; set; }
+    //}
+
+
+    
+
 }
