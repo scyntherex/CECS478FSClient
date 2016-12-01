@@ -34,7 +34,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.email = new System.Windows.Forms.TextBox();
             this.password = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.users_list = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -96,14 +95,6 @@
             this.password.TabIndex = 5;
             this.password.Text = "changeme";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(15, 216);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(831, 24);
-            this.textBox1.TabIndex = 6;
-            // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
@@ -158,13 +149,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(858, 250);
+            this.ClientSize = new System.Drawing.Size(858, 212);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.users_list);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.password);
             this.Controls.Add(this.email);
             this.Controls.Add(this.label2);
@@ -186,7 +176,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox email;
         private System.Windows.Forms.TextBox password;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.ComboBox users_list;
         private System.Windows.Forms.TextBox textBox2;

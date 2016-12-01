@@ -14,7 +14,8 @@ using Flurl;
 
 namespace FSchatFront
 {
-
+    //exchange keys 
+    //encrypt/decrypt
 
     public partial class Form1 : Form
     {
@@ -23,6 +24,7 @@ namespace FSchatFront
         // private ConvoUnique cid;
         //private string recipient_email;
         public string ConversationID;
+        private bool conversationDone = false;
         public Form1()
         {
             InitializeComponent();
@@ -54,7 +56,7 @@ namespace FSchatFront
                 });
                 string responseJson = await responseMessage.Content.ReadAsStringAsync();
                 user = JsonConvert.DeserializeObject<RootObject>(responseJson);
-                textBox1.Text = user.auth_token;
+                //textBox1.Text = user.auth_token;
 
                 if (responseMessage.IsSuccessStatusCode)
                 {
@@ -100,12 +102,15 @@ namespace FSchatFront
         private void users_list_SelectedIndexChanged(object sender, EventArgs e)
         {
             createConveration(users_list.SelectedItem.ToString());
+           // while (!conversationDone) ;
+            
         }
         
         public string conversation_id { get; set; }
         
         async void createConveration(string email)
         {
+            conversationDone = false;
             var url = new Url("https://thefsocietychat.herokuapp.com/conversations/create");
             var theclient = url.WithOAuthBearerToken(user.auth_token);
             var response = await theclient
@@ -121,12 +126,10 @@ namespace FSchatFront
             Form1 convoID = JsonConvert.DeserializeObject<Form1>(createConversatioResponse);
             string otherOutput = convoID.ToString();
             ConversationID = convoID.conversation_id.ToString();
-            MessageBox.Show(ConversationID);
+            //conversationDone = true;
+            //MessageBox.Show(ConversationID);
             // textBox3.Text = cid.ToString();
-
-
-
-
+            get_mess();
         }
 
         async void getUsers()
@@ -220,12 +223,19 @@ namespace FSchatFront
                     {
                         string responseJson = await response.Content.ReadAsStringAsync();
                         System.Data.DataSet dataSet = JsonConvert.DeserializeObject<System.Data.DataSet>(responseJson);
-                        System.Data.DataTable dataTable = dataSet.Tables[""];
+                        System.Data.DataTable dataTable = dataSet.Tables["messages"];
 
+                        //textBox3.Lines = new String[dataTable.Rows.Count];
+                        textBox3.Multiline = true;
+                        textBox3.AcceptsReturn = true;
+                        textBox3.ScrollBars = ScrollBars.Vertical;
+                        int count = 0;
                         foreach (System.Data.DataRow row in dataTable.Rows)
                         {
-                            users_list.Items.Add(row[""]);
+                            textBox3.AppendText((string)row["body"]);
+                            textBox3.AppendText(Environment.NewLine);
                         }
+                        
                     }
                 }
 
