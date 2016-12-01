@@ -36,6 +36,7 @@
             this.password = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.users_list = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button1
@@ -94,28 +95,39 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(355, 18);
+            this.textBox1.Location = new System.Drawing.Point(15, 216);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(211, 144);
+            this.textBox1.Size = new System.Drawing.Size(119, 24);
             this.textBox1.TabIndex = 6;
             // 
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(12, 119);
+            this.linkLabel1.Location = new System.Drawing.Point(79, 123);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(121, 13);
             this.linkLabel1.TabIndex = 7;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "You are now Logged on";
             this.linkLabel1.Visible = false;
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // users_list
+            // 
+            this.users_list.FormattingEnabled = true;
+            this.users_list.Location = new System.Drawing.Point(284, 33);
+            this.users_list.Name = "users_list";
+            this.users_list.Size = new System.Drawing.Size(125, 21);
+            this.users_list.TabIndex = 8;
+            this.users_list.SelectedIndexChanged += new System.EventHandler(this.users_list_SelectedIndexChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(562, 193);
+            this.ClientSize = new System.Drawing.Size(883, 255);
+            this.Controls.Add(this.users_list);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.password);
@@ -125,7 +137,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "FSchat";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -141,6 +153,7 @@
         private System.Windows.Forms.TextBox password;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.ComboBox users_list;
     }
 }
 
