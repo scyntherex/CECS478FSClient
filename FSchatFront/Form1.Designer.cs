@@ -39,6 +39,14 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.CreateAsmKeys = new System.Windows.Forms.Button();
+            this.Encrypt = new System.Windows.Forms.Button();
+            this.Decrypt = new System.Windows.Forms.Button();
+            this.ExportPubKey = new System.Windows.Forms.Button();
+            this.ImportPubKey = new System.Windows.Forms.Button();
+            this.GetPrivKey = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // button1
@@ -145,11 +153,85 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // CreateAsmKeys
+            // 
+            this.CreateAsmKeys.Location = new System.Drawing.Point(38, 245);
+            this.CreateAsmKeys.Name = "CreateAsmKeys";
+            this.CreateAsmKeys.Size = new System.Drawing.Size(75, 23);
+            this.CreateAsmKeys.TabIndex = 12;
+            this.CreateAsmKeys.Text = "CreateAsmKeys";
+            this.CreateAsmKeys.UseVisualStyleBackColor = true;
+            this.CreateAsmKeys.Click += new System.EventHandler(this.CreateAsmKeys_Click);
+            // 
+            // Encrypt
+            // 
+            this.Encrypt.Location = new System.Drawing.Point(153, 245);
+            this.Encrypt.Name = "Encrypt";
+            this.Encrypt.Size = new System.Drawing.Size(75, 23);
+            this.Encrypt.TabIndex = 13;
+            this.Encrypt.Text = "Encrypt";
+            this.Encrypt.UseVisualStyleBackColor = true;
+            this.Encrypt.Click += new System.EventHandler(this.Encrypt_Click);
+            // 
+            // Decrypt
+            // 
+            this.Decrypt.Location = new System.Drawing.Point(284, 245);
+            this.Decrypt.Name = "Decrypt";
+            this.Decrypt.Size = new System.Drawing.Size(75, 23);
+            this.Decrypt.TabIndex = 14;
+            this.Decrypt.Text = "Decrypt";
+            this.Decrypt.UseVisualStyleBackColor = true;
+            this.Decrypt.Click += new System.EventHandler(this.Decrypt_Click);
+            // 
+            // ExportPubKey
+            // 
+            this.ExportPubKey.Location = new System.Drawing.Point(400, 245);
+            this.ExportPubKey.Name = "ExportPubKey";
+            this.ExportPubKey.Size = new System.Drawing.Size(75, 23);
+            this.ExportPubKey.TabIndex = 15;
+            this.ExportPubKey.Text = "ExportPubKey";
+            this.ExportPubKey.UseVisualStyleBackColor = true;
+            this.ExportPubKey.Click += new System.EventHandler(this.ExportPubKey_Click);
+            // 
+            // ImportPubKey
+            // 
+            this.ImportPubKey.Location = new System.Drawing.Point(539, 245);
+            this.ImportPubKey.Name = "ImportPubKey";
+            this.ImportPubKey.Size = new System.Drawing.Size(75, 23);
+            this.ImportPubKey.TabIndex = 16;
+            this.ImportPubKey.Text = "ImportPubKey";
+            this.ImportPubKey.UseVisualStyleBackColor = true;
+            this.ImportPubKey.Click += new System.EventHandler(this.ImportPubKey_Click);
+            // 
+            // GetPrivKey
+            // 
+            this.GetPrivKey.Location = new System.Drawing.Point(662, 245);
+            this.GetPrivKey.Name = "GetPrivKey";
+            this.GetPrivKey.Size = new System.Drawing.Size(75, 23);
+            this.GetPrivKey.TabIndex = 17;
+            this.GetPrivKey.Text = "GetPrivKey";
+            this.GetPrivKey.UseVisualStyleBackColor = true;
+            this.GetPrivKey.Click += new System.EventHandler(this.GetPrivKey_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // openFileDialog2
+            // 
+            this.openFileDialog2.FileName = "openFileDialog2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(858, 212);
+            this.ClientSize = new System.Drawing.Size(858, 289);
+            this.Controls.Add(this.GetPrivKey);
+            this.Controls.Add(this.ImportPubKey);
+            this.Controls.Add(this.ExportPubKey);
+            this.Controls.Add(this.Decrypt);
+            this.Controls.Add(this.Encrypt);
+            this.Controls.Add(this.CreateAsmKeys);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
@@ -181,6 +263,14 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button CreateAsmKeys;
+        private System.Windows.Forms.Button Encrypt;
+        private System.Windows.Forms.Button Decrypt;
+        private System.Windows.Forms.Button ExportPubKey;
+        private System.Windows.Forms.Button ImportPubKey;
+        private System.Windows.Forms.Button GetPrivKey;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog2;
     }
 }
 
