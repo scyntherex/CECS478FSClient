@@ -110,7 +110,8 @@ namespace FSchatFront
         
         async void createConveration(string email)
         {
-            conversationDone = false;
+            //conversationDone = false;
+           
             var url = new Url("https://thefsocietychat.herokuapp.com/conversations/create");
             var theclient = url.WithOAuthBearerToken(user.auth_token);
             var response = await theclient
@@ -130,6 +131,7 @@ namespace FSchatFront
             //MessageBox.Show(ConversationID);
             // textBox3.Text = cid.ToString();
             get_mess();
+           
         }
 
         async void getUsers()
@@ -211,6 +213,7 @@ namespace FSchatFront
 
         async void get_mess()
         {
+            textBox3.Text = String.Empty;
             try
             {
                 using (HttpClient client = new HttpClient())
