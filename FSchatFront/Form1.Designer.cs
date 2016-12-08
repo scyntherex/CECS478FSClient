@@ -93,15 +93,16 @@
             this.email.Name = "email";
             this.email.Size = new System.Drawing.Size(242, 20);
             this.email.TabIndex = 4;
-            this.email.Text = "a@a.com";
+            this.email.TextChanged += new System.EventHandler(this.email_TextChanged);
             // 
             // password
             // 
             this.password.Location = new System.Drawing.Point(15, 84);
             this.password.Name = "password";
+            this.password.PasswordChar = '*';
             this.password.Size = new System.Drawing.Size(242, 20);
             this.password.TabIndex = 5;
-            this.password.Text = "changeme";
+            this.password.UseSystemPasswordChar = true;
             // 
             // linkLabel1
             // 
@@ -165,7 +166,7 @@
             // 
             // Encrypt
             // 
-            this.Encrypt.Location = new System.Drawing.Point(153, 245);
+            this.Encrypt.Location = new System.Drawing.Point(404, 245);
             this.Encrypt.Name = "Encrypt";
             this.Encrypt.Size = new System.Drawing.Size(75, 23);
             this.Encrypt.TabIndex = 13;
@@ -175,7 +176,7 @@
             // 
             // Decrypt
             // 
-            this.Decrypt.Location = new System.Drawing.Point(284, 245);
+            this.Decrypt.Location = new System.Drawing.Point(536, 245);
             this.Decrypt.Name = "Decrypt";
             this.Decrypt.Size = new System.Drawing.Size(75, 23);
             this.Decrypt.TabIndex = 14;
@@ -185,7 +186,7 @@
             // 
             // ExportPubKey
             // 
-            this.ExportPubKey.Location = new System.Drawing.Point(400, 245);
+            this.ExportPubKey.Location = new System.Drawing.Point(160, 245);
             this.ExportPubKey.Name = "ExportPubKey";
             this.ExportPubKey.Size = new System.Drawing.Size(75, 23);
             this.ExportPubKey.TabIndex = 15;
@@ -195,7 +196,7 @@
             // 
             // ImportPubKey
             // 
-            this.ImportPubKey.Location = new System.Drawing.Point(539, 245);
+            this.ImportPubKey.Location = new System.Drawing.Point(274, 245);
             this.ImportPubKey.Name = "ImportPubKey";
             this.ImportPubKey.Size = new System.Drawing.Size(75, 23);
             this.ImportPubKey.TabIndex = 16;
@@ -205,7 +206,7 @@
             // 
             // GetPrivKey
             // 
-            this.GetPrivKey.Location = new System.Drawing.Point(662, 245);
+            this.GetPrivKey.Location = new System.Drawing.Point(679, 245);
             this.GetPrivKey.Name = "GetPrivKey";
             this.GetPrivKey.Size = new System.Drawing.Size(75, 23);
             this.GetPrivKey.TabIndex = 17;
@@ -245,6 +246,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "FSchat";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

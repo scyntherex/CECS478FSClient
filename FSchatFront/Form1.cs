@@ -16,6 +16,7 @@ using System.IO;
 
 namespace FSchatFront
 {
+    //TODO
     //exchange keys 
     //encrypt/decrypt
 
@@ -47,9 +48,8 @@ namespace FSchatFront
         const string keyName = "Key01";
 
         private RootObject user;
-
         public string ConversationID;
-        private bool conversationDone = false;
+        
         public Form1()
         {
             InitializeComponent();
@@ -61,10 +61,10 @@ namespace FSchatFront
             Register newUser = new Register();
             newUser.Show();
         }
-
+        string em;
         private void button2_Click(object sender, EventArgs e)
         {
-            String em = email.Text;
+            em = email.Text;
             String pw = password.Text;
             loginUser();
             //autheticateUser("https://thefsocietychat.herokuapp.com/home");
@@ -87,6 +87,10 @@ namespace FSchatFront
                 {
                     linkLabel1.Visible = true;
                     getUsers();
+                    users_list.Enabled = true;
+                    textBox2.Enabled = true;
+                    textBox3.Enabled = true;
+                    button3.Enabled = true;
                 }
             }
             catch (FlurlHttpTimeoutException)
@@ -163,7 +167,10 @@ namespace FSchatFront
                         foreach(System.Data.DataRow row in dataTable.Rows)
                         {
                             users_list.Items.Add(row["email"]);
+                   
                         }
+                        string emailtoremove = email.ToString();
+                        users_list.Items.Remove(em);
                     }
                 }
               
@@ -549,6 +556,19 @@ namespace FSchatFront
                 label1.Text = "Key: " + cspp.KeyContainerName + " - Public Only";
             else
                 label1.Text = "Key: " + cspp.KeyContainerName + " - Full Key Pair";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            users_list.Enabled = false;
+            textBox2.Enabled = false;
+            textBox3.Enabled = false;
+            button3.Enabled = false;
+        }
+
+        private void email_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

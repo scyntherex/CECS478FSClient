@@ -43,7 +43,23 @@ namespace FSchatFront
                    password_confirmation = password_confirmation.Text.ToString()
                });
                 string responseJson = await responseMessage.Content.ReadAsStringAsync();
-                textBox4.Text = responseJson;               
+                //textBox4.Text = responseJson;   
+ //               MessageBox.Show(responseJson);
+                if (responseJson == "{user created}")
+                {
+                    MessageBox.Show("User Created");
+                    this.Hide();
+                    Form1 form1 = new Form1();
+                    form1.Show();
+                }
+                else
+                {
+                    MessageBox.Show("An error has occured. User not created.");
+                    email.Clear();
+                    password.Clear();
+                    password_confirmation.Clear();
+                    
+                }
            }
            catch (FlurlHttpTimeoutException)
            {
