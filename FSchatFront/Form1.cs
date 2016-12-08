@@ -65,6 +65,7 @@ namespace FSchatFront
         private void button2_Click(object sender, EventArgs e)
         {
             em = email.Text;
+            DataContainer.User = email.Text;
             String pw = password.Text;
             loginUser();
             //autheticateUser("https://thefsocietychat.herokuapp.com/home");
@@ -569,6 +570,12 @@ namespace FSchatFront
         private void email_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            encdeckeyx otherform = new encdeckeyx();
+            otherform.Show();
         }
     }
 
