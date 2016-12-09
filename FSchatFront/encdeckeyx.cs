@@ -77,7 +77,7 @@ namespace FSchatFront
                 {
                     byte[] data = Encrypt9(Encoding.UTF8.GetBytes(textBox3.Text), ref pubKey);
                     sending2 = Convert.ToBase64String(data);
-                    //textBox4.Text = sending2 ;
+                    textBox4.Text = sending2 ;
                
                 }
                 catch
@@ -270,6 +270,16 @@ namespace FSchatFront
             textBox5.Text = Encoding.UTF8.GetString(text);
 
            
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void username_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
     }

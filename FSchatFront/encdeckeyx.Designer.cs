@@ -119,6 +119,7 @@
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(100, 20);
             this.username.TabIndex = 7;
+            this.username.TextChanged += new System.EventHandler(this.username_TextChanged);
             // 
             // textBox3
             // 
@@ -126,6 +127,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 20);
             this.textBox3.TabIndex = 8;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // textBox4
             // 
