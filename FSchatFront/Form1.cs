@@ -484,10 +484,10 @@ namespace FSchatFront
 
         private void Decrypt_Click(object sender, EventArgs e)
         {
-            //byte[] text;
-            //string text2 = textBox4.Text;
-            //text = Dencrypt9(Convert.FromBase64String(text2));
-            //textBox5.Text = Encoding.UTF8.GetString(text);
+            byte[] text;
+            string text2 = textBox3.Text;
+            text = Dencrypt9(Convert.FromBase64String(text2));
+            textBox3.Text = Encoding.UTF8.GetString(text);
         }
 
         static byte[] Dencrypt9(byte[] input)

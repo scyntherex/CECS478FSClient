@@ -158,7 +158,7 @@
             // 
             // CreateAsmKeys
             // 
-            this.CreateAsmKeys.Location = new System.Drawing.Point(38, 245);
+            this.CreateAsmKeys.Location = new System.Drawing.Point(79, 233);
             this.CreateAsmKeys.Name = "CreateAsmKeys";
             this.CreateAsmKeys.Size = new System.Drawing.Size(75, 23);
             this.CreateAsmKeys.TabIndex = 12;
@@ -168,7 +168,7 @@
             // 
             // Encrypt
             // 
-            this.Encrypt.Location = new System.Drawing.Point(404, 245);
+            this.Encrypt.Location = new System.Drawing.Point(602, 223);
             this.Encrypt.Name = "Encrypt";
             this.Encrypt.Size = new System.Drawing.Size(75, 23);
             this.Encrypt.TabIndex = 13;
@@ -178,7 +178,7 @@
             // 
             // Decrypt
             // 
-            this.Decrypt.Location = new System.Drawing.Point(536, 245);
+            this.Decrypt.Location = new System.Drawing.Point(768, 223);
             this.Decrypt.Name = "Decrypt";
             this.Decrypt.Size = new System.Drawing.Size(75, 23);
             this.Decrypt.TabIndex = 14;
@@ -188,17 +188,18 @@
             // 
             // ExportPubKey
             // 
-            this.ExportPubKey.Location = new System.Drawing.Point(160, 245);
+            this.ExportPubKey.Location = new System.Drawing.Point(38, 299);
             this.ExportPubKey.Name = "ExportPubKey";
             this.ExportPubKey.Size = new System.Drawing.Size(75, 23);
             this.ExportPubKey.TabIndex = 15;
             this.ExportPubKey.Text = "ExportPubKey";
             this.ExportPubKey.UseVisualStyleBackColor = true;
+            this.ExportPubKey.Visible = false;
             this.ExportPubKey.Click += new System.EventHandler(this.ExportPubKey_Click);
             // 
             // ImportPubKey
             // 
-            this.ImportPubKey.Location = new System.Drawing.Point(274, 245);
+            this.ImportPubKey.Location = new System.Drawing.Point(442, 223);
             this.ImportPubKey.Name = "ImportPubKey";
             this.ImportPubKey.Size = new System.Drawing.Size(75, 23);
             this.ImportPubKey.TabIndex = 16;
@@ -208,12 +209,13 @@
             // 
             // GetPrivKey
             // 
-            this.GetPrivKey.Location = new System.Drawing.Point(679, 245);
+            this.GetPrivKey.Location = new System.Drawing.Point(160, 299);
             this.GetPrivKey.Name = "GetPrivKey";
             this.GetPrivKey.Size = new System.Drawing.Size(75, 23);
             this.GetPrivKey.TabIndex = 17;
             this.GetPrivKey.Text = "GetPrivKey";
             this.GetPrivKey.UseVisualStyleBackColor = true;
+            this.GetPrivKey.Visible = false;
             this.GetPrivKey.Click += new System.EventHandler(this.GetPrivKey_Click);
             // 
             // openFileDialog1
@@ -228,17 +230,18 @@
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(44, 210);
+            this.linkLabel2.Location = new System.Drawing.Point(281, 309);
             this.linkLabel2.Name = "linkLabel2";
             this.linkLabel2.Size = new System.Drawing.Size(55, 13);
             this.linkLabel2.TabIndex = 18;
             this.linkLabel2.TabStop = true;
             this.linkLabel2.Text = "linkLabel2";
+            this.linkLabel2.Visible = false;
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // username
             // 
-            this.username.Location = new System.Drawing.Point(160, 203);
+            this.username.Location = new System.Drawing.Point(68, 207);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(100, 20);
             this.username.TabIndex = 19;
@@ -247,7 +250,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(858, 289);
+            this.ClientSize = new System.Drawing.Size(858, 269);
             this.Controls.Add(this.username);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.GetPrivKey);
