@@ -17,14 +17,7 @@ using System.IO;
 namespace FSchatFront
 {
     //TODO
-    //exchange keys 
-    //encrypt/decrypt
-
-    //user checks if they have a pair key
-    // if user wants to send message, check for priv and pub keys from other users.
-    // if no publc for recipient, import, cause cant encrypt w/o public key.
-
-    // to decrypt, use the priv key
+    //OAEP
 
     public partial class Form1 : Form
     {
@@ -78,8 +71,6 @@ namespace FSchatFront
             SIZE_1369 = 1369
         };
 
-        //  const string keyName = "Key01";
-        //string keyName = "Key01";
         string keyName = DataContainer.User;
 
         // Public key file
@@ -157,7 +148,6 @@ namespace FSchatFront
                 {
                     using (HttpContent content = response.Content)
                     {
-
                         string response2 = await content.ReadAsStringAsync();
                         string output = response2.ToString();
                     }
@@ -169,11 +159,8 @@ namespace FSchatFront
         {
             try
             {
-                //EncrytorM();
                 string userToChat2 = users_list.SelectedItem.ToString();
                 DataContainer.messageToUser = userToChat2.ToString();
-                //encdeckeyx form1 = new encdeckeyx();
-                //form1.Show();
                 createConveration(DataContainer.messageToUser.ToString());
             }
             catch (System.NullReferenceException)
@@ -183,69 +170,6 @@ namespace FSchatFront
         }
 
         public string conversation_id { get; set; }
-
-       /* async void conversationsCreate2(string email)
-        {
-            string sending = sending2;
-            string myToken = DataContainer.ValueToShare.ToString();
-            string messageTo = DataContainer.messageToUser.ToString();
-            var builtUrl = new Url("https://thefsocietychat.herokuapp.com/conversations/create");
-            var client2 = builtUrl
-                .WithOAuthBearerToken(myToken);
-            var resp = await client2
-                .WithHeader("Accept", "application/json")
-                .PostUrlEncodedAsync(new
-                {
-                    recipient_email = email
-                })
-                .ReceiveString()
-                ;
-
-            string output = resp.ToString();
-            listAllUsers messageID = JsonConvert.DeserializeObject<listAllUsers>(output);
-            string output2 = messageID.ToString();
-            conversationID = messageID.id.ToString();
-
-            var builtUrl2 = new Url("https://chronoschat.co/messages/create");
-
-            var client3 = builtUrl2
-                .WithOAuthBearerToken(myToken);
-
-            try
-            {
-                var resp2 = await client3
-                  .WithHeader("Accept", "application/json")
-                  .PostUrlEncodedAsync(new
-                  {
-                      body = sending,
-                      conversation_id = conversationID
-                  })
-                  .ReceiveString()
-                  ;
-
-
-
-                string resp2Output = resp2.ToString();
-                listAllUsers sendOutput = JsonConvert.DeserializeObject<listAllUsers>(resp2Output);
-                string output3 = sendOutput.ToString();
-                string sendStatus = sendOutput.status.ToString();
-                MessageBox.Show(sendStatus);
-                if (sendStatus == "Message Sent")
-                {
-                    // textBox1.Clear();
-                }
-                else
-                {
-                    MessageBox.Show("An unknown error occured. Please try again later");
-                }
-            }
-            catch
-            {
-                MessageBox.Show("An Error Occured. Message Not Sent.");
-            }
-        }
-        */
-        
         
         async void createConveration(string email)
         {
@@ -362,8 +286,6 @@ namespace FSchatFront
                     using (HttpResponseMessage response = await client.GetAsync("https://thefsocietychat.herokuapp.com/messages/index?conversation_id=" 
                         + ConversationID))
                     {
-                        byte[] text;
-                        
                         string responseJson = await response.Content.ReadAsStringAsync();
                         System.Data.DataSet dataSet = JsonConvert.DeserializeObject<System.Data.DataSet>(responseJson);
                         System.Data.DataTable dataTable = dataSet.Tables["messages"];
@@ -373,11 +295,6 @@ namespace FSchatFront
                         textBox3.ScrollBars = ScrollBars.Vertical;
                         foreach (System.Data.DataRow row in dataTable.Rows)
                         {
-                            //string text2 = textBox3.Text;
-
-                            //text = Dencrypt9(Convert.FromBase64String(row["body"].ToString()));
-                            //textBox3.Text = Encoding.UTF8.GetString(text);
-
                             textBox3.AppendText((string)row["body"]);
                             textBox3.AppendText(Environment.NewLine);
                         }

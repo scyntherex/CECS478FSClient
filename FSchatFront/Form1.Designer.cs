@@ -250,7 +250,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(858, 269);
+            this.ClientSize = new System.Drawing.Size(858, 339);
             this.Controls.Add(this.username);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.GetPrivKey);
