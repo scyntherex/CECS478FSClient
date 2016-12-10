@@ -401,10 +401,19 @@ namespace FSchatFront
 
         private void Decrypt_Click(object sender, EventArgs e)
         {
-            byte[] text;
-            string text2 = textBox3.Text;
-            text = Dencrypt9(Convert.FromBase64String(text2));
-            textBox3.Text = Encoding.UTF8.GetString(text);
+            try
+            {
+                byte[] text;
+                string text2 = textBox3.Text;
+                
+                text = Dencrypt9(Convert.FromBase64String(text2));
+                textBox3.Text = Encoding.UTF8.GetString(text);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Unknown error. Can only send one message when the current one expires.");
+            }
+            
         }
 
         static byte[] Dencrypt9(byte[] input)
