@@ -233,6 +233,8 @@ namespace FSchatFront
             //this.Hide();
         }
 
+       
+
         private void buttonImportPublicKey_Click_1(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = SrcFolder;
@@ -265,8 +267,8 @@ namespace FSchatFront
         private void buttonDecrypt_Click(object sender, EventArgs e)
         {
             byte[] text;
-           string text2 = textBox4.Text;
-             text = Dencrypt9(Convert.FromBase64String(text2));
+            string text2 = textBox4.Text;
+            text = Dencrypt9(Convert.FromBase64String(text2));
             textBox5.Text = Encoding.UTF8.GetString(text);
 
            

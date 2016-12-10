@@ -28,28 +28,70 @@ namespace FSchatFront
 
     public partial class Form1 : Form
     {
+        public static string ShowDialog(string text, string caption)
+        {
+            Form prompt = new Form()
+            {
+                Width = 500,
+                Height = 150,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = caption,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            Label textLabel = new Label() { Left = 50, Top = 20, Text = text };
+            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 400 };
+            Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 70, DialogResult = DialogResult.OK };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(textBox);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel);
+            prompt.AcceptButton = confirmation;
 
+            return prompt.ShowDialog() == DialogResult.OK ? textBox.Text : "";
+
+        }
         // Declare CspParmeters and RsaCryptoServiceProvider
         // objects with global scope of your Form class.
-        CspParameters cspp = new CspParameters();
-        RSACryptoServiceProvider rsa;
+        System.Security.Cryptography.CspParameters cspp = new System.Security.Cryptography.CspParameters();
+        System.Security.Cryptography.RSACryptoServiceProvider rsa;
 
         // Path variables for source, encryption, and
         // decryption folders. Must end with a backslash.
-        const string EncrFolder = @"c:\Users\Rone\Desktop\Encrypt";
-        const string DecrFolder = @"c:\Users\Rone\Desktop\Decrypt";
-        const string SrcFolder = @"c:\Users\Rone\Desktop\src";
+        const string EncrFolder = @"c:\Encrypt\";
+        const string DecrFolder = @"c:\Decrypt\";
+        const string SrcFolder = @"c:\docs\";
 
         // Public key file
-        const string PubKeyFile = @"c:\Users\Rone\Desktop\Encrypt\rsaPublicKey.txt";
+
 
         // Key container name for
         // private/public key value pair.
-        const string keyName = "Key01";
+        public string pubKey;
+        public string privKey;
+
+        public enum KeySizes
+        {
+            SIZE_512 = 512,
+            SIZE_1024 = 1024,
+            SIZE_2048 = 2048,
+            SIZE_952 = 952,
+            SIZE_1369 = 1369
+        };
+
+        //  const string keyName = "Key01";
+        //string keyName = "Key01";
+        string keyName = DataContainer.User;
+
+        // Public key file
+        string PubKeyFile = @"c:\Encrypt\rsaPublicKey_";
+
+        string message;
 
         private RootObject user;
         public string ConversationID;
-        
+
+        string sending2;
+
         public Form1()
         {
             InitializeComponent();
@@ -125,13 +167,89 @@ namespace FSchatFront
 
         private void users_list_SelectedIndexChanged(object sender, EventArgs e)
         {
-            createConveration(users_list.SelectedItem.ToString());
+            try
+            {
+                //EncrytorM();
+                string userToChat2 = users_list.SelectedItem.ToString();
+                DataContainer.messageToUser = userToChat2.ToString();
+                //encdeckeyx form1 = new encdeckeyx();
+                //form1.Show();
+                createConveration(DataContainer.messageToUser.ToString());
+            }
+            catch (System.NullReferenceException)
+            {
+                MessageBox.Show("Select a Recipient First");
+            }
         }
-        
+
         public string conversation_id { get; set; }
+
+       /* async void conversationsCreate2(string email)
+        {
+            string sending = sending2;
+            string myToken = DataContainer.ValueToShare.ToString();
+            string messageTo = DataContainer.messageToUser.ToString();
+            var builtUrl = new Url("https://thefsocietychat.herokuapp.com/conversations/create");
+            var client2 = builtUrl
+                .WithOAuthBearerToken(myToken);
+            var resp = await client2
+                .WithHeader("Accept", "application/json")
+                .PostUrlEncodedAsync(new
+                {
+                    recipient_email = email
+                })
+                .ReceiveString()
+                ;
+
+            string output = resp.ToString();
+            listAllUsers messageID = JsonConvert.DeserializeObject<listAllUsers>(output);
+            string output2 = messageID.ToString();
+            conversationID = messageID.id.ToString();
+
+            var builtUrl2 = new Url("https://chronoschat.co/messages/create");
+
+            var client3 = builtUrl2
+                .WithOAuthBearerToken(myToken);
+
+            try
+            {
+                var resp2 = await client3
+                  .WithHeader("Accept", "application/json")
+                  .PostUrlEncodedAsync(new
+                  {
+                      body = sending,
+                      conversation_id = conversationID
+                  })
+                  .ReceiveString()
+                  ;
+
+
+
+                string resp2Output = resp2.ToString();
+                listAllUsers sendOutput = JsonConvert.DeserializeObject<listAllUsers>(resp2Output);
+                string output3 = sendOutput.ToString();
+                string sendStatus = sendOutput.status.ToString();
+                MessageBox.Show(sendStatus);
+                if (sendStatus == "Message Sent")
+                {
+                    // textBox1.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("An unknown error occured. Please try again later");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("An Error Occured. Message Not Sent.");
+            }
+        }
+        */
+        
         
         async void createConveration(string email)
         {
+            
             var url = new Url("https://thefsocietychat.herokuapp.com/conversations/create");
             var theclient = url.WithOAuthBearerToken(user.auth_token);
             var response = await theclient
@@ -195,9 +313,10 @@ namespace FSchatFront
 
         }
 
+        
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            
+            message = textBox2.Text;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -243,6 +362,8 @@ namespace FSchatFront
                     using (HttpResponseMessage response = await client.GetAsync("https://thefsocietychat.herokuapp.com/messages/index?conversation_id=" 
                         + ConversationID))
                     {
+                        byte[] text;
+                        
                         string responseJson = await response.Content.ReadAsStringAsync();
                         System.Data.DataSet dataSet = JsonConvert.DeserializeObject<System.Data.DataSet>(responseJson);
                         System.Data.DataTable dataTable = dataSet.Tables["messages"];
@@ -252,6 +373,11 @@ namespace FSchatFront
                         textBox3.ScrollBars = ScrollBars.Vertical;
                         foreach (System.Data.DataRow row in dataTable.Rows)
                         {
+                            //string text2 = textBox3.Text;
+
+                            //text = Dencrypt9(Convert.FromBase64String(row["body"].ToString()));
+                            //textBox3.Text = Encoding.UTF8.GetString(text);
+
                             textBox3.AppendText((string)row["body"]);
                             textBox3.AppendText(Environment.NewLine);
                         }
@@ -271,292 +397,158 @@ namespace FSchatFront
                 else
                     MessageBox.Show("Totally failed before getting a response! " + ex.Message);
             }
-        }
-
-        private void EncryptFile(string inFile)
-        {
-
-            // Create instance of Rijndael for
-            // symetric encryption of the data.
-            RijndaelManaged rjndl = new RijndaelManaged();
-            rjndl.KeySize = 256;
-            rjndl.BlockSize = 256;
-            rjndl.Mode = CipherMode.CBC;
-            ICryptoTransform transform = rjndl.CreateEncryptor();
-
-            // Use RSACryptoServiceProvider to
-            // enrypt the Rijndael key.
-            // rsa is previously instantiated: 
-            //    rsa = new RSACryptoServiceProvider(cspp);
-            byte[] keyEncrypted = rsa.Encrypt(rjndl.Key, false);
-
-            // Create byte arrays to contain
-            // the length values of the key and IV.
-            byte[] LenK = new byte[4];
-            byte[] LenIV = new byte[4];
-
-            int lKey = keyEncrypted.Length;
-            LenK = BitConverter.GetBytes(lKey);
-            int lIV = rjndl.IV.Length;
-            LenIV = BitConverter.GetBytes(lIV);
-
-            // Write the following to the FileStream
-            // for the encrypted file (outFs):
-            // - length of the key
-            // - length of the IV
-            // - ecrypted key
-            // - the IV
-            // - the encrypted cipher content
-
-            int startFileName = inFile.LastIndexOf("\\") + 1;
-            // Change the file's extension to ".enc"
-            string outFile = EncrFolder + inFile.Substring(startFileName, inFile.LastIndexOf(".") - startFileName) + ".enc";
-
-            using (FileStream outFs = new FileStream(outFile, FileMode.Create))
-            {
-
-                outFs.Write(LenK, 0, 4);
-                outFs.Write(LenIV, 0, 4);
-                outFs.Write(keyEncrypted, 0, lKey);
-                outFs.Write(rjndl.IV, 0, lIV);
-
-                // Now write the cipher text using
-                // a CryptoStream for encrypting.
-                using (CryptoStream outStreamEncrypted = new CryptoStream(outFs, transform, CryptoStreamMode.Write))
-                {
-
-                    // By encrypting a chunk at
-                    // a time, you can save memory
-                    // and accommodate large files.
-                    int count = 0;
-                    int offset = 0;
-
-                    // blockSizeBytes can be any arbitrary size.
-                    int blockSizeBytes = rjndl.BlockSize / 8;
-                    byte[] data = new byte[blockSizeBytes];
-                    int bytesRead = 0;
-
-                    using (FileStream inFs = new FileStream(inFile, FileMode.Open))
-                    {
-                        do
-                        {
-                            count = inFs.Read(data, 0, blockSizeBytes);
-                            offset += count;
-                            outStreamEncrypted.Write(data, 0, count);
-                            bytesRead += blockSizeBytes;
-                        }
-                        while (count > 0);
-                       // string temp_inBase64 = Convert.ToBase64String(data);
-                       // inFs.WriteAllLines(@"C:\Users\Rone\Desktop\EncryptrsaPublicKey.enc", temp_inBase64);
-                        inFs.Close();
-                    }
-                    outStreamEncrypted.FlushFinalBlock();
-                    outStreamEncrypted.Close();
-                }
-                outFs.Close();
-            }
-
-        }
-
-        private void DecryptFile(string inFile)
-        {
-
-            // Create instance of Rijndael for
-            // symetric decryption of the data.
-            RijndaelManaged rjndl = new RijndaelManaged();
-            rjndl.KeySize = 256;
-            rjndl.BlockSize = 256;
-            rjndl.Mode = CipherMode.CBC;
-
-            // Create byte arrays to get the length of
-            // the encrypted key and IV.
-            // These values were stored as 4 bytes each
-            // at the beginning of the encrypted package.
-            byte[] LenK = new byte[4];
-            byte[] LenIV = new byte[4];
-
-            // Consruct the file name for the decrypted file.
-            string outFile = DecrFolder + inFile.Substring(0, inFile.LastIndexOf(".")) + ".txt";
-
-            // Use FileStream objects to read the encrypted
-            // file (inFs) and save the decrypted file (outFs).
-            using (FileStream inFs = new FileStream(EncrFolder + inFile, FileMode.Open))
-            {
-
-                inFs.Seek(0, SeekOrigin.Begin);
-                inFs.Seek(0, SeekOrigin.Begin);
-                inFs.Read(LenK, 0, 3);
-                inFs.Seek(4, SeekOrigin.Begin);
-                inFs.Read(LenIV, 0, 3);
-
-                // Convert the lengths to integer values.
-                int lenK = BitConverter.ToInt32(LenK, 0);
-                int lenIV = BitConverter.ToInt32(LenIV, 0);
-
-                // Determine the start postition of
-                // the ciphter text (startC)
-                // and its length(lenC).
-                int startC = lenK + lenIV + 8;
-                int lenC = (int)inFs.Length - startC;
-
-                // Create the byte arrays for
-                // the encrypted Rijndael key,
-                // the IV, and the cipher text.
-                byte[] KeyEncrypted = new byte[lenK];
-                byte[] IV = new byte[lenIV];
-
-                // Extract the key and IV
-                // starting from index 8
-                // after the length values.
-                inFs.Seek(8, SeekOrigin.Begin);
-                inFs.Read(KeyEncrypted, 0, lenK);
-                inFs.Seek(8 + lenK, SeekOrigin.Begin);
-                inFs.Read(IV, 0, lenIV);
-                Directory.CreateDirectory(DecrFolder);
-                // Use RSACryptoServiceProvider
-                // to decrypt the Rijndael key.
-                byte[] KeyDecrypted = rsa.Decrypt(KeyEncrypted, false);
-
-                // Decrypt the key.
-                ICryptoTransform transform = rjndl.CreateDecryptor(KeyDecrypted, IV);
-
-                // Decrypt the cipher text from
-                // from the FileSteam of the encrypted
-                // file (inFs) into the FileStream
-                // for the decrypted file (outFs).
-                using (FileStream outFs = new FileStream(outFile, FileMode.Create))
-                {
-
-                    int count = 0;
-                    int offset = 0;
-
-                    // blockSizeBytes can be any arbitrary size.
-                    int blockSizeBytes = rjndl.BlockSize / 8;
-                    byte[] data = new byte[blockSizeBytes];
-
-
-                    // By decrypting a chunk a time,
-                    // you can save memory and
-                    // accommodate large files.
-
-                    // Start at the beginning
-                    // of the cipher text.
-                    inFs.Seek(startC, SeekOrigin.Begin);
-                    using (CryptoStream outStreamDecrypted = new CryptoStream(outFs, transform, CryptoStreamMode.Write))
-                    {
-                        do
-                        {
-                            count = inFs.Read(data, 0, blockSizeBytes);
-                            offset += count;
-                            outStreamDecrypted.Write(data, 0, count);
-
-                        }
-                        while (count > 0);
-
-                        outStreamDecrypted.FlushFinalBlock();
-                        outStreamDecrypted.Close();
-                    }
-                    outFs.Close();
-                }
-                inFs.Close();
-            }
-
-        }
+        }                      
 
         private void CreateAsmKeys_Click(object sender, EventArgs e)
         {
-            // Stores a key pair in the key container.
-            cspp.KeyContainerName = keyName;
-            rsa = new RSACryptoServiceProvider(cspp);
-            rsa.PersistKeyInCsp = true;
-            if (rsa.PublicOnly == true)
-                label1.Text = "Key: " + cspp.KeyContainerName + " - Public Only";
-            else
-                label1.Text = "Key: " + cspp.KeyContainerName + " - Full Key Pair";
+            DataContainer.User = username.Text;
+            DialogResult dialogResult = MessageBox.Show("This will overwrite any existing keys for " + DataContainer.User.ToString() + ". Do you want to continue?", "WARNING", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                MessageBox.Show("New KeySet Created");
+                cspp.KeyContainerName = DataContainer.User;
+
+                rsa = new RSACryptoServiceProvider(2048, cspp);
+                //store a key pair in the key container.
+
+                rsa.PersistKeyInCsp = true;
+                if (rsa.PublicOnly == true)
+                    label1.Text = "Key: " + cspp.KeyContainerName + " - Public Only";
+                else
+                    label1.Text = "Key: " + cspp.KeyContainerName + " - Full Key Pair";
+
+
+                string promptValue = encdeckeyx.ShowDialog("Enter a file name", "New File");
+                // MessageBox.Show(promptValue);
+
+                string keyFileName = PubKeyFile + promptValue + ".txt";
+
+                Directory.CreateDirectory(EncrFolder);
+                StreamWriter sw = new StreamWriter(keyFileName, false);
+                sw.Write(rsa.ToXmlString(false));
+                sw.Close();
+                MessageBox.Show("Public Key Exported to:" + keyFileName);
+                DataContainer.privateKey = rsa.ExportParameters(true);
+
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do nothing
+            }
 
         }
 
         private void Encrypt_Click(object sender, EventArgs e)
         {
-            if (rsa == null)
-                MessageBox.Show("Key not set.");
-            else
-            {
+            EncrytorM();
+        }
 
-                // Display a dialog box to select a file to encrypt.
-                openFileDialog1.InitialDirectory = SrcFolder;
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    string fName = openFileDialog1.FileName;
-                    if (fName != null)
-                    {
-                        FileInfo fInfo = new FileInfo(fName);
-                        // Pass the file name without the path.
-                        string name = fInfo.FullName;
-                        EncryptFile(name);
-                    }
-                }
+        void EncrytorM()
+        {
+            try
+            {
+                byte[] data = Encrypt9(Encoding.UTF8.GetBytes(message), ref pubKey);
+                sending2 = Convert.ToBase64String(data);
+                textBox2.Text = sending2;
+
             }
+            catch
+            {
+                MessageBox.Show("Set a Public Key First");
+            }
+
+        }
+        static byte[] Encrypt9(byte[] input, ref string key2)
+        {
+            byte[] encrypted;
+            using (var rsa = new RSACryptoServiceProvider(2048))
+            {
+                rsa.PersistKeyInCsp = false;
+                try
+                {
+                    rsa.ImportParameters(DataContainer.publicKey);
+                    encrypted = rsa.Encrypt(input, true);
+                    key2 = rsa.ToXmlString(false);
+
+                }
+                catch (System.Security.Cryptography.CryptographicException)
+                {
+                    encrypted = null;
+                    MessageBox.Show("No Public Key Set");
+                }
+
+            }
+
+            return encrypted;
         }
 
         private void Decrypt_Click(object sender, EventArgs e)
         {
-            if (rsa == null)
-                MessageBox.Show("Key not set.");
-            else
+            //byte[] text;
+            //string text2 = textBox4.Text;
+            //text = Dencrypt9(Convert.FromBase64String(text2));
+            //textBox5.Text = Encoding.UTF8.GetString(text);
+        }
+
+        static byte[] Dencrypt9(byte[] input)
+        {
+            byte[] dencrypted;
+            using (var rsa = new RSACryptoServiceProvider(2048))
             {
-                // Display a dialog box to select the encrypted file.
-                openFileDialog2.InitialDirectory = EncrFolder;
-                if (openFileDialog2.ShowDialog() == DialogResult.OK)
+                rsa.PersistKeyInCsp = false;
+                rsa.ImportParameters(DataContainer.privateKey);
+                try
                 {
-                    string fName = openFileDialog2.FileName;
-                    if (fName != null)
-                    {
-                        FileInfo fi = new FileInfo(fName);
-                        string name = fi.Name;
-                        DecryptFile(name);
-                    }
+                    dencrypted = rsa.Decrypt(input, true);
                 }
+                catch
+                {
+                    MessageBox.Show("Incorrect Private Key");
+                    dencrypted = null;
+                }
+
+
             }
+            return dencrypted;
         }
 
         private void ExportPubKey_Click(object sender, EventArgs e)
         {
-            // Save the public key created by the RSA
-            // to a file. Caution, persisting the
-            // key to a file is a security risk.
-            Directory.CreateDirectory(EncrFolder);
-            StreamWriter sw = new StreamWriter(PubKeyFile, false);
-            sw.Write(rsa.ToXmlString(false));
-            sw.Close();
+            
         }
 
         private void ImportPubKey_Click(object sender, EventArgs e)
         {
-            StreamReader sr = new StreamReader(PubKeyFile);
-            cspp.KeyContainerName = keyName;
-            rsa = new RSACryptoServiceProvider(cspp);
-            string keytxt = sr.ReadToEnd();
-            rsa.FromXmlString(keytxt);
-            rsa.PersistKeyInCsp = true;
-            if (rsa.PublicOnly == true)
-                label1.Text = "Key: " + cspp.KeyContainerName + " - Public Only";
-            else
-                label1.Text = "Key: " + cspp.KeyContainerName + " - Full Key Pair";
-            sr.Close();
+            openFileDialog1.InitialDirectory = SrcFolder;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string fName = openFileDialog1.FileName;
+                if (fName != null)
+                {
+                    FileInfo fInfo = new FileInfo(fName);
+                    // Pass the file name without the path.
+                    string name = fInfo.FullName;
+                    StreamReader sr = new StreamReader(name);
+                    cspp.KeyContainerName = keyName;
+                    rsa = new RSACryptoServiceProvider(2048, cspp);
+
+                    string keytxt = sr.ReadToEnd();
+                    rsa.FromXmlString(keytxt);
+                    rsa.PersistKeyInCsp = true;
+                    DataContainer.publicKey = rsa.ExportParameters(false);
+                    if (rsa.PublicOnly == true)
+                        label1.Text = "Key: Public Only";
+                    else
+                        label1.Text = "Key: Full Key Pair for: " + cspp.KeyContainerName;
+                    sr.Close();
+
+                }
+            }
         }
 
         private void GetPrivKey_Click(object sender, EventArgs e)
         {
-            cspp.KeyContainerName = keyName;
-
-            rsa = new RSACryptoServiceProvider(cspp);
-            rsa.PersistKeyInCsp = true;
-
-            if (rsa.PublicOnly == true)
-                label1.Text = "Key: " + cspp.KeyContainerName + " - Public Only";
-            else
-                label1.Text = "Key: " + cspp.KeyContainerName + " - Full Key Pair";
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -576,6 +568,11 @@ namespace FSchatFront
         {
             encdeckeyx otherform = new encdeckeyx();
             otherform.Show();
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            
         }
     }
 
