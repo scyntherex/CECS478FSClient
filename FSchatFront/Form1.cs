@@ -429,11 +429,6 @@ namespace FSchatFront
             return dencrypted;
         }
 
-        private void ExportPubKey_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void ImportPubKey_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = SrcFolder;
@@ -463,11 +458,6 @@ namespace FSchatFront
             }
         }
 
-        private void GetPrivKey_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             users_list.Enabled = false;
@@ -479,12 +469,6 @@ namespace FSchatFront
         private void email_TextChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            encdeckeyx otherform = new encdeckeyx();
-            otherform.Show();
         }
 
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)

@@ -42,12 +42,9 @@
             this.CreateAsmKeys = new System.Windows.Forms.Button();
             this.Encrypt = new System.Windows.Forms.Button();
             this.Decrypt = new System.Windows.Forms.Button();
-            this.ExportPubKey = new System.Windows.Forms.Button();
             this.ImportPubKey = new System.Windows.Forms.Button();
-            this.GetPrivKey = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.username = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
@@ -186,17 +183,6 @@
             this.Decrypt.UseVisualStyleBackColor = true;
             this.Decrypt.Click += new System.EventHandler(this.Decrypt_Click);
             // 
-            // ExportPubKey
-            // 
-            this.ExportPubKey.Location = new System.Drawing.Point(38, 299);
-            this.ExportPubKey.Name = "ExportPubKey";
-            this.ExportPubKey.Size = new System.Drawing.Size(75, 23);
-            this.ExportPubKey.TabIndex = 15;
-            this.ExportPubKey.Text = "ExportPubKey";
-            this.ExportPubKey.UseVisualStyleBackColor = true;
-            this.ExportPubKey.Visible = false;
-            this.ExportPubKey.Click += new System.EventHandler(this.ExportPubKey_Click);
-            // 
             // ImportPubKey
             // 
             this.ImportPubKey.Location = new System.Drawing.Point(442, 223);
@@ -207,17 +193,6 @@
             this.ImportPubKey.UseVisualStyleBackColor = true;
             this.ImportPubKey.Click += new System.EventHandler(this.ImportPubKey_Click);
             // 
-            // GetPrivKey
-            // 
-            this.GetPrivKey.Location = new System.Drawing.Point(160, 299);
-            this.GetPrivKey.Name = "GetPrivKey";
-            this.GetPrivKey.Size = new System.Drawing.Size(75, 23);
-            this.GetPrivKey.TabIndex = 17;
-            this.GetPrivKey.Text = "GetPrivKey";
-            this.GetPrivKey.UseVisualStyleBackColor = true;
-            this.GetPrivKey.Visible = false;
-            this.GetPrivKey.Click += new System.EventHandler(this.GetPrivKey_Click);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -226,18 +201,6 @@
             // openFileDialog2
             // 
             this.openFileDialog2.FileName = "openFileDialog2";
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(281, 309);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(55, 13);
-            this.linkLabel2.TabIndex = 18;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "linkLabel2";
-            this.linkLabel2.Visible = false;
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // username
             // 
@@ -250,12 +213,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(858, 339);
+            this.ClientSize = new System.Drawing.Size(858, 272);
             this.Controls.Add(this.username);
-            this.Controls.Add(this.linkLabel2);
-            this.Controls.Add(this.GetPrivKey);
             this.Controls.Add(this.ImportPubKey);
-            this.Controls.Add(this.ExportPubKey);
             this.Controls.Add(this.Decrypt);
             this.Controls.Add(this.Encrypt);
             this.Controls.Add(this.CreateAsmKeys);
@@ -294,12 +254,9 @@
         private System.Windows.Forms.Button CreateAsmKeys;
         private System.Windows.Forms.Button Encrypt;
         private System.Windows.Forms.Button Decrypt;
-        private System.Windows.Forms.Button ExportPubKey;
         private System.Windows.Forms.Button ImportPubKey;
-        private System.Windows.Forms.Button GetPrivKey;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
-        private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.TextBox username;
     }
 }
