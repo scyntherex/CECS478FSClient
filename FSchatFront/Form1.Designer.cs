@@ -37,7 +37,6 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.users_list = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.CreateAsmKeys = new System.Windows.Forms.Button();
             this.Encrypt = new System.Windows.Forms.Button();
@@ -46,6 +45,8 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.username = new System.Windows.Forms.TextBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -128,26 +129,15 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(432, 157);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(347, 20);
+            this.textBox2.Size = new System.Drawing.Size(136, 20);
             this.textBox2.TabIndex = 9;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
-            // textBox3
-            // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.textBox3.Location = new System.Drawing.Point(432, 33);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(411, 98);
-            this.textBox3.TabIndex = 10;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(785, 157);
+            this.button3.Location = new System.Drawing.Point(563, 155);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(58, 23);
+            this.button3.Size = new System.Drawing.Size(40, 23);
             this.button3.TabIndex = 11;
             this.button3.Text = "send";
             this.button3.UseVisualStyleBackColor = true;
@@ -155,7 +145,7 @@
             // 
             // CreateAsmKeys
             // 
-            this.CreateAsmKeys.Location = new System.Drawing.Point(79, 233);
+            this.CreateAsmKeys.Location = new System.Drawing.Point(182, 218);
             this.CreateAsmKeys.Name = "CreateAsmKeys";
             this.CreateAsmKeys.Size = new System.Drawing.Size(75, 23);
             this.CreateAsmKeys.TabIndex = 12;
@@ -165,7 +155,7 @@
             // 
             // Encrypt
             // 
-            this.Encrypt.Location = new System.Drawing.Point(602, 223);
+            this.Encrypt.Location = new System.Drawing.Point(528, 220);
             this.Encrypt.Name = "Encrypt";
             this.Encrypt.Size = new System.Drawing.Size(75, 23);
             this.Encrypt.TabIndex = 13;
@@ -175,7 +165,7 @@
             // 
             // Decrypt
             // 
-            this.Decrypt.Location = new System.Drawing.Point(768, 223);
+            this.Decrypt.Location = new System.Drawing.Point(79, 272);
             this.Decrypt.Name = "Decrypt";
             this.Decrypt.Size = new System.Drawing.Size(75, 23);
             this.Decrypt.TabIndex = 14;
@@ -185,7 +175,7 @@
             // 
             // ImportPubKey
             // 
-            this.ImportPubKey.Location = new System.Drawing.Point(442, 223);
+            this.ImportPubKey.Location = new System.Drawing.Point(432, 220);
             this.ImportPubKey.Name = "ImportPubKey";
             this.ImportPubKey.Size = new System.Drawing.Size(75, 23);
             this.ImportPubKey.TabIndex = 16;
@@ -204,23 +194,32 @@
             // 
             // username
             // 
-            this.username.Location = new System.Drawing.Point(68, 207);
+            this.username.Location = new System.Drawing.Point(15, 220);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(100, 20);
             this.username.TabIndex = 19;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(432, 34);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(171, 106);
+            this.dataGridView1.TabIndex = 20;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(858, 272);
+            this.ClientSize = new System.Drawing.Size(624, 267);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.username);
             this.Controls.Add(this.ImportPubKey);
             this.Controls.Add(this.Decrypt);
             this.Controls.Add(this.Encrypt);
             this.Controls.Add(this.CreateAsmKeys);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.users_list);
             this.Controls.Add(this.linkLabel1);
@@ -233,6 +232,7 @@
             this.Name = "Form1";
             this.Text = "FSchat";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -249,7 +249,6 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.ComboBox users_list;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button CreateAsmKeys;
         private System.Windows.Forms.Button Encrypt;
@@ -258,6 +257,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.TextBox username;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

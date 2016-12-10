@@ -123,8 +123,9 @@ namespace FSchatFront
                     getUsers();
                     users_list.Enabled = true;
                     textBox2.Enabled = true;
-                    textBox3.Enabled = true;
+                    //textBox3.Enabled = true;
                     button3.Enabled = true;
+                    dataGridView1.Enabled = true;
                 }
             }
             catch (FlurlHttpTimeoutException)
@@ -275,7 +276,7 @@ namespace FSchatFront
 
         async void get_mess()
         {
-            textBox3.Text = String.Empty;
+            //textBox3.Text = String.Empty;
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -286,17 +287,27 @@ namespace FSchatFront
                     using (HttpResponseMessage response = await client.GetAsync("https://thefsocietychat.herokuapp.com/messages/index?conversation_id=" 
                         + ConversationID))
                     {
+                        byte[] body;
                         string responseJson = await response.Content.ReadAsStringAsync();
                         System.Data.DataSet dataSet = JsonConvert.DeserializeObject<System.Data.DataSet>(responseJson);
                         System.Data.DataTable dataTable = dataSet.Tables["messages"];
 
-                        textBox3.Multiline = true;
-                        textBox3.AcceptsReturn = true;
-                        textBox3.ScrollBars = ScrollBars.Vertical;
+                        DataTable table = new DataTable();
+                        table.Columns.Add("Message", typeof(string));
+
                         foreach (System.Data.DataRow row in dataTable.Rows)
                         {
-                            textBox3.AppendText((string)row["body"]);
-                            textBox3.AppendText(Environment.NewLine);
+                            body = Dencrypt9(Convert.FromBase64String(row["body"].ToString()));
+                            if (body != null)
+                            {
+                                table.Rows.Add(Encoding.UTF8.GetString(body));
+                            }
+                            else
+                            {
+                                table.Rows.Add("???????????????????????");
+                            }
+                            
+                            dataGridView1.DataSource = table;
                         }
                         
                     }
@@ -404,10 +415,10 @@ namespace FSchatFront
             try
             {
                 byte[] text;
-                string text2 = textBox3.Text;
+                //string text2 = textBox3.Text;
                 
-                text = Dencrypt9(Convert.FromBase64String(text2));
-                textBox3.Text = Encoding.UTF8.GetString(text);
+               // text = Dencrypt9(Convert.FromBase64String(text2));
+                //textBox3.Text = Encoding.UTF8.GetString(text);
             }
             catch (FormatException)
             {
@@ -471,8 +482,9 @@ namespace FSchatFront
         {
             users_list.Enabled = false;
             textBox2.Enabled = false;
-            textBox3.Enabled = false;
+            //textBox3.Enabled = false;
             button3.Enabled = false;
+            dataGridView1.Enabled = false;
         }
 
         private void email_TextChanged(object sender, EventArgs e)
