@@ -16,8 +16,6 @@ using System.IO;
 
 namespace FSchatFront
 {
-    //TODO
-    //OAEP
 
     public partial class Form1 : Form
     {
@@ -108,14 +106,14 @@ namespace FSchatFront
         {
             try
             {
-                HttpResponseMessage responseMessage = await "https://thefsocietychat.herokuapp.com/auth_user".PostUrlEncodedAsync(new
+                HttpResponseMessage responseMessage = await "https://thefsocietychat.herokuapp.com/auth_user"
+                    .PostUrlEncodedAsync(new
                 {
                     email = email.Text.ToString(),
                     password = password.Text.ToString(),
                 });
                 string responseJson = await responseMessage.Content.ReadAsStringAsync();
                 user = JsonConvert.DeserializeObject<RootObject>(responseJson);
-                //textBox1.Text = user.auth_token;
 
                 if (responseMessage.IsSuccessStatusCode)
                 {
@@ -123,7 +121,6 @@ namespace FSchatFront
                     getUsers();
                     users_list.Enabled = true;
                     textBox2.Enabled = true;
-                    //textBox3.Enabled = true;
                     button3.Enabled = true;
                     dataGridView1.Enabled = true;
                 }
@@ -202,7 +199,8 @@ namespace FSchatFront
                     string accesstoken = user.auth_token;
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accesstoken);
 
-                    using (HttpResponseMessage response = await client.GetAsync("https://thefsocietychat.herokuapp.com/conversations/index"))
+                    using (HttpResponseMessage response = await client
+                        .GetAsync("https://thefsocietychat.herokuapp.com/conversations/index"))
                     {
                         string responseJson = await response.Content.ReadAsStringAsync();
                         System.Data.DataSet dataSet = JsonConvert.DeserializeObject<System.Data.DataSet>(responseJson);
@@ -264,7 +262,6 @@ namespace FSchatFront
             ;
 
             string result = response.ToString();
-            //MessageBox.Show(result);
             get_mess();
         }
 
@@ -276,7 +273,7 @@ namespace FSchatFront
 
         async void get_mess()
         {
-            //textBox3.Text = String.Empty;
+ 
             try
             {
                 using (HttpClient client = new HttpClient())
@@ -284,7 +281,8 @@ namespace FSchatFront
                     string accesstoken = user.auth_token;
                     client.DefaultRequestHeaders.Add("Authorization", "Bearer " + accesstoken);
 
-                    using (HttpResponseMessage response = await client.GetAsync("https://thefsocietychat.herokuapp.com/messages/index?conversation_id=" 
+                    using (HttpResponseMessage response = await client
+                        .GetAsync("https://thefsocietychat.herokuapp.com/messages/index?conversation_id=" 
                         + ConversationID))
                     {
                         byte[] body;
@@ -297,14 +295,14 @@ namespace FSchatFront
 
                         foreach (System.Data.DataRow row in dataTable.Rows)
                         {
-                            body = Dencrypt9(Convert.FromBase64String(row["body"].ToString()));
+                            body = Decryptdata(Convert.FromBase64String(row["body"].ToString()));
                             if (body != null)
                             {
                                 table.Rows.Add(Encoding.UTF8.GetString(body));
                             }
                             else
                             {
-                                table.Rows.Add("???????????????????????");
+                                table.Rows.Add("ERROR");
                             }
                             
                             dataGridView1.DataSource = table;
@@ -330,7 +328,8 @@ namespace FSchatFront
         private void CreateAsmKeys_Click(object sender, EventArgs e)
         {
             DataContainer.User = username.Text;
-            DialogResult dialogResult = MessageBox.Show("This will overwrite any existing keys for " + DataContainer.User.ToString() + ". Do you want to continue?", "WARNING", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("This will overwrite any existing keys for " 
+                + DataContainer.User.ToString() + ". Do you want to continue?", "WARNING", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 MessageBox.Show("New KeySet Created");
@@ -346,8 +345,7 @@ namespace FSchatFront
                     label1.Text = "Key: " + cspp.KeyContainerName + " - Full Key Pair";
 
 
-                string promptValue = encdeckeyx.ShowDialog("Enter a file name", "New File");
-                // MessageBox.Show(promptValue);
+                string promptValue = ShowDialog("Enter a file name", "New File");
 
                 string keyFileName = PubKeyFile + promptValue + ".txt";
 
@@ -368,14 +366,14 @@ namespace FSchatFront
 
         private void Encrypt_Click(object sender, EventArgs e)
         {
-            EncrytorM();
+            Encryptor();
         }
 
-        void EncrytorM()
+        void Encryptor()
         {
             try
             {
-                byte[] data = Encrypt9(Encoding.UTF8.GetBytes(message), ref pubKey);
+                byte[] data = Encryptdata(Encoding.UTF8.GetBytes(message), ref pubKey);
                 sending2 = Convert.ToBase64String(data);
                 textBox2.Text = sending2;
 
@@ -386,7 +384,7 @@ namespace FSchatFront
             }
 
         }
-        static byte[] Encrypt9(byte[] input, ref string key2)
+        static byte[] Encryptdata(byte[] input, ref string key2)
         {
             byte[] encrypted;
             using (var rsa = new RSACryptoServiceProvider(2048))
@@ -410,43 +408,26 @@ namespace FSchatFront
             return encrypted;
         }
 
-        private void Decrypt_Click(object sender, EventArgs e)
+        static byte[] Decryptdata(byte[] input)
         {
-            try
-            {
-                byte[] text;
-                //string text2 = textBox3.Text;
-                
-               // text = Dencrypt9(Convert.FromBase64String(text2));
-                //textBox3.Text = Encoding.UTF8.GetString(text);
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Unknown error. Can only send one message when the current one expires.");
-            }
-            
-        }
-
-        static byte[] Dencrypt9(byte[] input)
-        {
-            byte[] dencrypted;
+            byte[] decrypted;
             using (var rsa = new RSACryptoServiceProvider(2048))
             {
                 rsa.PersistKeyInCsp = false;
                 rsa.ImportParameters(DataContainer.privateKey);
                 try
                 {
-                    dencrypted = rsa.Decrypt(input, true);
+                    decrypted = rsa.Decrypt(input, true);
                 }
                 catch
                 {
                     MessageBox.Show("Incorrect Private Key");
-                    dencrypted = null;
+                    decrypted = null;
                 }
 
 
             }
-            return dencrypted;
+            return decrypted;
         }
 
         private void ImportPubKey_Click(object sender, EventArgs e)
@@ -482,7 +463,6 @@ namespace FSchatFront
         {
             users_list.Enabled = false;
             textBox2.Enabled = false;
-            //textBox3.Enabled = false;
             button3.Enabled = false;
             dataGridView1.Enabled = false;
         }

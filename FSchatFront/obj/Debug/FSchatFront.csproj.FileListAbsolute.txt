@@ -32,5 +32,4 @@ C:\Users\Rone\Source\Repos\CECS478FSClient\FSchatFront\obj\Debug\FSchatFront.Pro
 C:\Users\Rone\Source\Repos\CECS478FSClient\FSchatFront\obj\Debug\FSchatFront.Register.resources
 C:\Users\Rone\Source\Repos\CECS478FSClient\FSchatFront\obj\Debug\FSchatFront.csproj.GenerateResource.Cache
 C:\Users\Rone\Source\Repos\CECS478FSClient\FSchatFront\obj\Debug\FSchatFront.Form1.resources
-C:\Users\Rone\Source\Repos\CECS478FSClient\FSchatFront\obj\Debug\FSchatFront.encdeckeyx.resources
 C:\Users\Rone\Source\Repos\CECS478FSClient\FSchatFront\obj\Debug\FSchatFront.csprojResolveAssemblyReference.cache

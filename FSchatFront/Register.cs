@@ -36,7 +36,8 @@ namespace FSchatFront
         {
            try
            {
-               HttpResponseMessage responseMessage = await "https://thefsocietychat.herokuapp.com/reg_user".PostUrlEncodedAsync(new
+               HttpResponseMessage responseMessage = await "https://thefsocietychat.herokuapp.com/reg_user"
+                    .PostUrlEncodedAsync(new
                {
                    email = email.Text.ToString(),
                    password = password.Text.ToString(),

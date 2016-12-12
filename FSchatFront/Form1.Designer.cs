@@ -40,7 +40,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.CreateAsmKeys = new System.Windows.Forms.Button();
             this.Encrypt = new System.Windows.Forms.Button();
-            this.Decrypt = new System.Windows.Forms.Button();
             this.ImportPubKey = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
@@ -163,16 +162,6 @@
             this.Encrypt.UseVisualStyleBackColor = true;
             this.Encrypt.Click += new System.EventHandler(this.Encrypt_Click);
             // 
-            // Decrypt
-            // 
-            this.Decrypt.Location = new System.Drawing.Point(79, 272);
-            this.Decrypt.Name = "Decrypt";
-            this.Decrypt.Size = new System.Drawing.Size(75, 23);
-            this.Decrypt.TabIndex = 14;
-            this.Decrypt.Text = "Decrypt";
-            this.Decrypt.UseVisualStyleBackColor = true;
-            this.Decrypt.Click += new System.EventHandler(this.Decrypt_Click);
-            // 
             // ImportPubKey
             // 
             this.ImportPubKey.Location = new System.Drawing.Point(432, 220);
@@ -212,11 +201,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 267);
+            this.ClientSize = new System.Drawing.Size(624, 262);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.username);
             this.Controls.Add(this.ImportPubKey);
-            this.Controls.Add(this.Decrypt);
             this.Controls.Add(this.Encrypt);
             this.Controls.Add(this.CreateAsmKeys);
             this.Controls.Add(this.button3);
@@ -252,7 +240,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button CreateAsmKeys;
         private System.Windows.Forms.Button Encrypt;
-        private System.Windows.Forms.Button Decrypt;
         private System.Windows.Forms.Button ImportPubKey;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
